@@ -1,0 +1,10 @@
+.center-component{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.input_info{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+}
