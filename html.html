@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Текст вокруг круглого изображения</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .circle-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .circle-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+
+      .text-circle {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .text-circle p {
+        font-size: 18px;
+        text-align: center;
+        & > * {
+          rotate: 90deg;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="circle-container">
+      <img
+        src="your-image.jpg"
+        alt="Круглое изображение"
+        class="circle-image" />
+      <div class="text-circle">
+        <p>Ваш текст вокруг изображения</p>
+      </div>
+    </div>
+    <script>
+      window.onload = function () {
+        const text = "Ваш текст вокруг изображения ";
+        const textContainer = document.querySelector(".text-circle p");
+        const radius = 100; // Радиус круга (половина ширины/высоты изображения)
+        const circleText = createCircularText(text, radius);
+        textContainer.innerHTML = circleText;
+      };
+
+      function createCircularText(text, radius) {
+        const characters = text.split("");
+        const angleStep = (2 * Math.PI) / characters.length;
+        let circleText = "";
+
+        characters.forEach((char, index) => {
+          const angle = index * angleStep;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          circleText += `<span style="position: absolute; left: ${
+            x + radius
+          }px; top: ${
+            y + radius
+          }px; transform: translate(-50%, -50%) rotate(${angle}rad);">${char}</span>`;
+        });
+
+        return circleText;
+      }
+    </script>
+  </body>
+</html>

@@ -7,26 +7,6 @@
     include "../../components/global-css-settings.php";
     session_start();
     $_SESSION['page'] = "login";
-
-    if ($_REQUEST['fullname'] != "") {
-        $fullname = $_REQUEST['fullname'];
-    }
-    if ($_REQUEST['login'] != "") {
-        $login = $_REQUEST['login'];
-    }
-    if ($_REQUEST['password'] != "") {
-        $password = $_REQUEST['password'];
-    }
-
-    if ($fullname != "" and $login != ""  and $password != "") {
-        $Q =
-            "INSERT INTO `users` 
-            (`id`, `role`, `fullname`, `login`, `password`) 
-            VALUES (NULL, 'user', '$fullname', '$login', '$password')";
-
-        mysqli_query($des, $Q);
-    }
-
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,33 +16,14 @@
 
 <body>
     <div class="center-component">
-        <?php
-        if ($_REQUEST['reg'] == "true") {
-            echo "<form id=login action=? method=GET>";
-        } else {
-            echo "<form id=login action=../admin-panel/index.php method=POST>";
-        }
-
-        ?>
-        <form id="login" action="../admin-panel/index.php" method="POST">
-
-            <?php
-            if ($_REQUEST['select_user'] == "false") {
-                echo "<div>";
-                echo "  <span class='Error'>";
-                echo "      Вы не правильно ввели логин или пароль";
-                echo "  </span>";
-                echo "</div>";
-            };
-            ?>
-            <?php
-            if ($_REQUEST['reg'] == "true") {
-                echo "<div>";
-                echo "  <span> Имя </span>";
-                echo "  <input type=text name=fullname required>";
-                echo "</div>";
-            }
-            ?>
+        <form id="loginForm">
+            <div id="error-message" style="display:none; color:red;"></div>
+            <div id="register-fields" style="display:none;">
+                <div>
+                    <span>Имя</span>
+                    <input type="text" id="fullname" name="fullname">
+                </div>
+            </div>
             <div>
                 <span>Логин</span>
                 <input type="text" name="login" required>
@@ -72,24 +33,64 @@
                 <input type="password" name="password" required>
             </div>
             <div>
-                <button type="submit">
-                    Войти
-                </button>
+                <button type="submit">Войти</button>
             </div>
-            <?php
-            if ($_REQUEST['reg'] == "true") {
-                echo "<a href=?>
-                    Вы уже смешарик?
-                </a>";
-            } else {
-
-                echo "<a href='?reg=true'>
-                    Вы здесь в первый раз?
-                </a>";
-            }
-            ?>
+            <div id="register-link">
+                <a href="#" id="toggle-register">Вы здесь в первый раз?</a>
+            </div>
         </form>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#toggle-register').click(function(e) {
+                e.preventDefault();
+                if ($('#register-fields').is(':visible')) {
+                    $('#register-fields').hide();
+                    $('#fullname').prop('required', false);
+                    $('#toggle-register').text('Вы здесь в первый раз?');
+                } else {
+                    $('#register-fields').show();
+                    $('#fullname').prop('required', true);
+                    $('#toggle-register').text('Вы уже смешарик?');
+                }
+            });
+
+            $('#loginForm').submit(function(e) {
+                console.log('submit');
+                e.preventDefault();
+                let formData = $(this).serialize();
+                let actionUrl = $('#register-fields').is(':visible') ? './register.php' : './login.php';
+
+                $.ajax({
+                    url: actionUrl,
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log(response);
+
+                        response = JSON.parse(response);
+                        console.log(response);
+                        if (response.success === true) {
+                            window.location.href = response.redirect;
+                        } else {
+                            $('#error-message').text(response.message).show();
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        $('#error-message').text('Произошла ошибка. Попробуйте снова.').show();
+                    }
+                });
+            });
+
+            $('#register-link a').click(function(e) {
+                e.preventDefault();
+                $('#loginForm').submit();
+            });
+        });
+    </script>
 </body>
 
 </html>

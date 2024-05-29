@@ -31,6 +31,8 @@ form > div{
     margin: 20px; */
 }
 .filter{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     border: 1px solid black;
     border-radius: 10px;
     margin: 10px;
@@ -38,7 +40,7 @@ form > div{
     width: 300px;
     background-color: var(--main-color);
 }
-.target-products{
+.create-product{
     display: grid;
     grid-template-rows: 1fr 100px;
     /* background-color: var(--main-color); */
@@ -61,4 +63,64 @@ form > div{
     margin-top: 52px;
     min-width: 573px;
     background-color: brown;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.products {
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    width: 90%;
+    justify-content: center;
+}
+
+.product {
+    --indentation: 20px;
+
+    display: grid;
+    grid-template-columns: 200px 200px;
+
+    margin: calc(var(--indentation) /2);
+    padding: var(--indentation);
+
+    min-width: calc(440px - var(--indentation)*2);
+    max-width: 100%;
+
+    border: solid black 1px;
+    border-radius: 12px;
+
+    background-color: var(--main-color);
+}
+
+.product>.character {
+    font-size: 20px;
+    padding: auto;
+    padding-right: 20px;
+
+    display: grid;
+    text-align: left;
+    align-items: center;
+    grid-template-rows: 20px 1fr;
+}
+
+.product>.character>div>div {
+    margin-bottom: 20px;
+}
+
+.product>.character>input[type='checkbox'] {
+    width: 14px;
+    height: 14px;
+}
+
+.plus>form {
+    display: flex;
+    flex-direction: column;
+    flex: 130px;
+    margin: 20px
 }
