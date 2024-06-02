@@ -1,3 +1,28 @@
+const createProduct = (product) => {
+  let numHTML = `<div> ${product["creator"]} </div> `;
+
+  let plus = ` <button class=plus data-id='${product["id"]}'> Купить </button>`;
+
+  let character = `
+      <div>Имя: ${product["name"]} </div>
+      <div>Цена: ${product["price"]}руб</div>
+  `;
+
+  let productHTML = `
+      <div class='product'>
+          <div class='character'>
+              ${numHTML}
+              <div>
+                  ${character}
+              </div>
+          </div>
+          <img src=${product["url"]}></img>
+          ${plus} 
+      </div>
+  `;
+  return productHTML;
+};
+
 $(document).ready(function () {
   // Функция для проверки заполненности всех полей
   function checkFormFields() {
@@ -35,18 +60,19 @@ $(document).ready(function () {
       dataType: "json",
       success: function (response) {
         if (response.success) {
-          console.log($(".center-component").html());
+          const newProduct = createProduct(response.updated_product);
+
           $(".popup-left").html($(".center-component").html());
 
           $("#success_message").show().delay(3000).fadeOut();
           // Обновляем информацию о продукте
-          $(".center-component").first().html(response.updated_product_html);
+          $(".center-component").first().html(newProduct);
 
           // Запускаем попапы
           $(".popup-right").css("right", "0px");
           $(".popup-left").css("left", "0px");
 
-          $(".popup-right").html(response.updated_product_html);
+          $(".popup-right").html(newProduct);
 
           setTimeout(function () {
             $(".popup-right").css("right", "-700px");

@@ -31,16 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Получаем обновленную информацию о продукте
             $select_query = "SELECT * FROM `products` WHERE `id` = '$update_id'";
             $result = mysqli_query($des, $select_query);
-            $product = mysqli_fetch_array($result);
+            $product = mysqli_fetch_assoc($result);
 
             // Генерируем HTML для обновленного продукта
-            ob_start();
-            echo create_product($product, 1, "user");
-            $updated_product_html = ob_get_clean();
+
 
             $response = [
                 "success" => true,
-                "updated_product_html" => $updated_product_html
+                "updated_product" => $product
             ];
         }
     }

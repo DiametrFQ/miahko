@@ -3,9 +3,11 @@
 
 <head>
     <?php
+    session_start();
     include "../../components/db-connect.php";
     include "../../components/global-css-settings.php";
     include "../../components/product.php";
+    include "../../components/header.php";
 
     $product_abs = mysqli_query($des, "SELECT * from `products` WHERE `id` = '$_REQUEST[update_id]'");
     $product = mysqli_fetch_array($product_abs);
@@ -23,7 +25,8 @@
 </head>
 
 <body>
-    <a href="../admin-panel/"><button> Вернутся</button></a>
+    <?= create_header($_SESSION["user_login"]) ?>
+    <a href="../admin-panel/"><button class="back"> Вернутся</button></a>
 
     <div class="center-component">
         <?= create_product($product, 1, "user") ?>
@@ -44,7 +47,7 @@
         <div id="error_message" style="color: red; display: none;">Не все данные введены</div>
         <div id="success_message" style="color: green; display: none;">Информация успешно обновлена</div>
     </div>
-
+    <?= create_footer() ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts.js"></script>
 </body>
