@@ -19,10 +19,8 @@
         <form id="loginForm">
             <div id="error-message" style="display:none; color:red;"></div>
             <div id="register-fields" style="display:none;">
-                <div>
-                    <span>Имя</span>
-                    <input type="text" id="fullname" name="fullname">
-                </div>
+                <span>Имя</span>
+                <input type="text" id="fullname" name="fullname">
             </div>
             <div>
                 <span>Логин</span>
@@ -36,15 +34,15 @@
                 <button type="submit">Войти</button>
             </div>
             <div id="register-link">
-                <a href="#" id="toggle-register">Вы здесь в первый раз?</a>
+                <div id="toggle-register">Вы здесь в первый раз?</div>
             </div>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#toggle-register').click(function(e) {
+        $(document).ready(() => {
+            $('#toggle-register').click((e) => {
                 e.preventDefault();
                 if ($('#register-fields').is(':visible')) {
                     $('#register-fields').hide();
@@ -78,14 +76,14 @@
                             $('#error-message').text(response.message).show();
                         }
                     },
-                    error: function() {
+                    error: () => {
                         console.log('error');
                         $('#error-message').text('Произошла ошибка. Попробуйте снова.').show();
                     }
                 });
             });
 
-            $('#register-link a').click(function(e) {
+            $('#register-link a').click((e) => {
                 e.preventDefault();
                 $('#loginForm').submit();
             });

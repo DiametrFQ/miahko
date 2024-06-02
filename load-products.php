@@ -14,6 +14,9 @@ if (!empty($from)) {
 if (!empty($to)) {
     $query .= " AND `price` <= $to";
 }
+echo $query;
+echo $query;
+echo $query;
 
 $rez = mysqli_query($des, $query);
 

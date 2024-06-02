@@ -5,10 +5,63 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+
+    & > #loginForm {
+        border: 1px solid black;
+        border-radius: 16px;
+        background-color: var(--main-color);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+
+            & > input {
+                margin-top: 10px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            & > button {
+                padding: 10px;
+                border-radius: 8px;
+            }
+        }
+    }
 }
 #login > div{
     width: 200px;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
+
+/* 
+<div class="center-component">
+<form id="loginForm">
+    <div id="error-message" style="display:none; color:red;"></div>
+    <div id="register-fields" style="display:none;">
+        <div>
+            <span>Имя</span>
+            <input type="text" id="fullname" name="fullname">
+        </div>
+    </div>
+    <div>
+        <span>Логин</span>
+        <input type="text" name="login" required>
+    </div>
+    <div>
+        <span>Пароль</span>
+        <input type="password" name="password" required>
+    </div>
+    <div>
+        <button type="submit">Войти</button>
+    </div>
+    <div id="register-link">
+        <a href="#" id="toggle-register">Вы здесь в первый раз?</a>
+    </div>
+</form>
+</div> */

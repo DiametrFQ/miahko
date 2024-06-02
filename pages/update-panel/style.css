@@ -133,3 +133,30 @@ img {
         color: white;
     }
 }
+
+#updateForm{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    width: 400px;
+    /* flex: 130px; */
+    margin: 20px;
+    padding: 20px;
+    border:1px solid black;
+    border-radius: 16px;
+
+    & > * {
+        margin: 5px;
+    }
+
+    
+    & > input {
+        padding: 5px;
+        border-radius: 8px;
+    }
+
+    & > textarea {
+        min-width: 360px;
+        max-width: 386px;
+    }
+}

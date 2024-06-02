@@ -12,9 +12,6 @@ $_SESSION["from"] = $from;
 $_SESSION["to"] = $to;
 $_SESSION["filt_creator"] = $filt_creator;
 
-$DESC = isset($_SESSION["DESC"]) ? $_SESSION["DESC"] : false;
-$p = $DESC ? "ORDER BY creator DESC" : "ORDER BY creator";
-
 $query = "WHERE user_id = $user_id";
 if ($from !== "") {
     $query .= " AND `price` >= $from ";
@@ -26,8 +23,10 @@ if ($filt_creator !== "") {
     $query .= " AND `creator` = '$filt_creator' ";
 }
 
-$rez = mysqli_query($des, "SELECT * FROM products $query $p");
-$r = 1;
-while ($mas = mysqli_fetch_array($rez)) {
-    echo create_product($mas, $r++, "admin");
+$rez = mysqli_query($des, "SELECT * FROM products $query");
+$data_products = [];
+while ($mas = mysqli_fetch_assoc($rez)) {
+    $data_products[] = $mas;
 }
+
+echo json_encode($data_products, JSON_UNESCAPED_UNICODE);

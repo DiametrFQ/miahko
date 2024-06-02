@@ -40,6 +40,7 @@
     $rez = mysqli_query($des, $query);
 
     ?>
+
     <?= create_header($_SESSION["user_login"]) ?>
 
     <form class="search" id="searchForm">
@@ -88,6 +89,7 @@
                     id
                 },
                 success: function(data) {
+                    console.log(data);
                     data = JSON.parse(data);
                     console.log(data.success);
                     if (data.success) {
@@ -100,6 +102,7 @@
         $(document).ready(function() {
 
             function updateData(formData, url) {
+                console.log(formData);
                 $.ajax({
                     type: "POST",
                     url: url,
@@ -110,7 +113,6 @@
 
                         $(".products").html(""); // Очищаем содержимое элемента
                         response.forEach(function(product) {
-                            console.log(product);
                             const a = `
                             <form class="product">
                                 <div class="character">                       
@@ -120,18 +122,17 @@
                                 <div>
                                             
                                 <div>${product.name}</div>
-                                <div>${product.price}</div>
+                                <div>${product.price}руб</div>
                                 
                             </div>
                             </div>
                                 <img src="${product.url}">
                                 <button type="submit" id="buy" -data-id="${product.id}"> Купить </div> 
                             </form>`
-                            console.log(product);
                             $(".products").append(a);
                         });
                     },
-                    error: function(xhr, status, error) {
+                    error: (xhr, status, error) => {
                         console.error(xhr.responseText);
                     }
                 });

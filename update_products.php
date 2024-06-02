@@ -8,10 +8,13 @@ $from = isset($_POST["from-price"]) ? $_POST["from-price"] : "";
 $to = isset($_POST["to-price"]) ? $_POST["to-price"] : "";
 
 // Строим SQL запрос для поиска продуктов
-$query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $search . "%' OR `creator` LIKE '%" . $search . "%'";
+$query = "SELECT * FROM `products` WHERE (`name` LIKE '%" . $search . "%' OR `creator` LIKE '%" . $search . "%')";
 
-if (!empty($from) && !empty($to)) {
-    $query .= " AND `price` BETWEEN " . intval($from) . " AND " . intval($to);
+if (!empty($from)) {
+    $query .= " AND `price` >= $from";
+}
+if (!empty($to)) {
+    $query .= " AND `price` <= $to";
 }
 // Выполняем запрос к базе данных
 $result = mysqli_query($des, $query);

@@ -7,6 +7,7 @@
     include "../../components/db-connect.php";
     include "../../components/global-css-settings.php";
     include "../../components/product.php";
+    session_start();
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +18,11 @@
 </head>
 
 <body>
-    <?= create_header($_COOKIE["user_login"]) ?>
+    <?= create_header($_SESSION["user_login"]) ?>
 
-    <a class="back" href="../../index.php?user_login=<?= $_COOKIE['user_login'] ?>">Назад</a>
+    <div>asdasdasd</div>
+
+    <a class="back" href="../../index.php?user_login=<?= $_SESSION['user_login'] ?>">Назад</a>
 
     <div class="products">
         <?php
@@ -28,7 +31,7 @@
         FROM `bucket` as `b` 
         inner join `products` as `pr` 
         ON `b`.`product_id` = `pr`.`id` 
-        WHERE `b`.`user_id` = '$_COOKIE[user_id]'";
+        WHERE `b`.`user_id` = '$_SESSION[user_id]'";
 
         $abs_products = mysqli_query($des, $select_query);
 
@@ -39,7 +42,7 @@
     </div>
 
     <?= create_footer() ?>
-    <script src="components/productRequest.js"></script>
+    <!-- <script src="components/productRequest.js"></script> -->
     <script>
         $(document).ready(function() {
             $(document).on("click", ".buy", function() {
@@ -69,7 +72,7 @@
                             </div>
                                 <div>        
                                     <div>${product.name}</div>
-                                    <div>${product.price}</div>
+                                    <div>${product.price}руб</div>
                                 </div>
                             </div>
                             <img src="${product.url}">

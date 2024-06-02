@@ -1,6 +1,7 @@
 <?php
 include "../../components/db-connect.php";
 include "../../components/product.php";
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prod_id = $_POST["prod_id"];
@@ -8,13 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $update_query = "UPDATE `bucket` 
                     SET `count` = $count 
-                    WHERE `user_id` = $_COOKIE[user_id]
+                    WHERE `user_id` = $_SESSION[user_id]
                     AND `product_id` = $prod_id";
 
 
     if (mysqli_query($des, $update_query)) {
         // Получаем обновленную информацию о товаре
-        $select_query = "SELECT * FROM `bucket` WHERE `user_id` = '$_COOKIE[user_id]'";
+        $select_query = "SELECT * FROM `bucket` WHERE `user_id` = '$_SESSION[user_id]'";
 
         $bucket_result = mysqli_query($des, $select_query);
 

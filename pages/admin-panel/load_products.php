@@ -24,6 +24,10 @@ if ($filt_creator !== "") {
 
 $rez = mysqli_query($des, "SELECT * FROM products $query $p");
 $r = 1;
-while ($mas = mysqli_fetch_array($rez)) {
-    echo create_product($mas, $r++, "admin");
+
+$options = [];
+while ($mas = mysqli_fetch_assoc($rez)) {
+    $options[] = $mas;
 }
+
+echo json_encode($options, JSON_UNESCAPED_UNICODE);

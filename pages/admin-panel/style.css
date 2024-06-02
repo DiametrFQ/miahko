@@ -124,3 +124,45 @@ img {
     flex: 130px;
     margin: 20px
 }
+
+
+/* <a href="../../index.php"><button class="back"> Вернуться</button></a>
+<div class="view">
+    <div class="filters">
+        Сортировать <a href="#" id="sort-asc">по возрастанию</a> <a href="#" id="sort-desc">по убыванию</a>
+        <br>
+        <div class="filter">
+            Фильтр по цене
+            <form id="filter-price" method="GET">
+                <span>От</span> <input type="number" name="from">
+                <span>До</span> <input type="number" name="to">
+                <br><button type="submit"> Отфильтровать </button>
+            </form>
+        </div>
+        <div class="filter">
+            Фильтр по Компаниям
+            <form id="filter-creator" method="GET">
+                <select name="filt_creator">
+                    <option value=""></option>
+                    <!-- Опции будут заполнены через AJAX -->
+                </select>
+                <br><button type="submit"> Отфильтровать </button>
+            </form>
+        </div>
+        <br>
+        <div class="filter">
+            Добавление
+            <form id="create-product" method="POST">
+                <span>Компания</span> <input type="text" name="creator" required>
+                <span>Название</span> <input type="text" name="name" required>
+                <span>Цена</span> <input type="number" name="price" required>
+                <span>Картинка</span> <textarea name="url" required></textarea>
+                <br><button type="submit"> Добавить </button>
+            </form>
+        </div>
+    </div>
+    <form id="delete-products" method="POST">
+        <div class="products"> </div>
+        <button class="btn-del" type="submit">УДАЛИТЬ ВЫБРАННЫЕ ТОВАРЫ!!!</button>
+    </form>
+</div> */
