@@ -1,7 +1,6 @@
 $(document).ready(function () {
   $(document).on("click", ".buy", function () {
     const product_id = $(this).data("id");
-    console.log(product_id);
 
     const form_data = $("form[data-id=" + product_id + "]").serialize();
     $.ajax({
@@ -63,6 +62,20 @@ $(document).ready(function () {
 
           $(".products").append(a); // Добавляем HTML блок продукта к элементу с классом "products"
         });
+      },
+    });
+  });
+
+  $(document).on("click", ".removes", function () {
+    const product_id = $(this).data("id");
+    $.ajax({
+      type: "POST",
+      url: "./delete_from_basket.php",
+      data: {
+        product_id,
+      },
+      success: () => {
+        $(this).parent().parent().parent().remove();
       },
     });
   });

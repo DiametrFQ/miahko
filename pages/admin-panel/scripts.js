@@ -1,31 +1,27 @@
 const createProduct = (data) =>
   data.map((product, i) => {
-    let numHTML = `
-            <div>
-                ${i + 1} <input type=checkbox name=delete_id value=${
-      product["id"]
-    } />
-            </div>
-        `;
-    let plus = `
-            <div>
-                <button type="button" class="delete-product-btn" data-id=${product["id"]}>Удалить</button>
-                <a href='../update-panel/index.php?update_id=${product["id"]}'>Изменить</a>
-            </div>`;
-    let character = `
-            <div>Имя: ${product["name"]} </div>
-            <div>Цена: ${product["price"]}руб</div>
-        `;
     let productHTML = `
             <div class='product'>
-                <div class='character'>
-                    ${numHTML}
-                    <div>
-                        ${character}
-                    </div>
-                </div>
                 <img src=${product["url"]}></img>
-                ${plus} 
+                <div class='character'>
+                    <div class="character_num"> ${i + 1} 
+                        <input type=checkbox name=delete_id value=${
+                          product["id"]
+                        } />
+                    </div>
+                    <div class="product_info">
+                        <div>Имя: ${product["name"]} </div>
+                        <div>Цена: ${product["price"]}руб</div>
+                    </div>
+                    <div class="buttons">
+                      <button type="button" class="delete-product-btn" data-id=${
+                        product["id"]
+                      }>Удалить</button>
+                      <a href='../update-panel/index.php?update_id=${
+                        product["id"]
+                      }'>Изменить</a>
+                    </div >
+                </div>
             </div>
         `;
     return productHTML;
@@ -160,6 +156,8 @@ $(document).ready(function () {
       },
     });
   });
+
+  $(".btn-del").on("click", () => $(".delete-products").submit());
 
   loadProducts();
   loadCreators();

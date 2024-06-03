@@ -1,6 +1,8 @@
 <?php
-include "./components/db-connect.php";
-include "./components/product.php";
+include "../../components/header.php";
+include "../../components/db-connect.php";
+include "../../components/global-css-settings.php";
+include "../../components/product.php";
 // Подключение к базе данных и другие необходимые операции
 session_start();
 
