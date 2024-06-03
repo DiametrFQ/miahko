@@ -63,6 +63,10 @@
                     <input type="number" name="price" required>
                 </div>
                 <div>
+                    <span>Скидка</span>
+                    <input type="number" name="discount" min="0" max="100" required>
+                </div>
+                <div>
                     <span>Картинка</span>
                     <textarea name="url" required></textarea>
                 </div>

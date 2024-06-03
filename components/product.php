@@ -60,7 +60,7 @@ function create_product($product_info, $num, $role)
                     <span>⠀</span>
                     <span>⠀</span>
                     <span>⠀</span>
-                    <button class=removes data-id=$product_info[id]>Удалить</button>
+                    <button class=removes_btn data-id=$product_info[id]>Удалить</button>
                 </span>
             </div>";
     }

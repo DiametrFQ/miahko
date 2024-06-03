@@ -16,7 +16,8 @@ $(document).ready(function () {
         $(".products").html("");
 
         products.products.forEach(function (product) {
-          const a = `
+          if (product.creator) {
+            const a = `
                     <div class="product">
                 <div class="character">
                     
@@ -53,20 +54,22 @@ $(document).ready(function () {
                             <a href="?buy_prod_id=66&amp;count=5">Купить</a>
                             <span>⠀</span>
                             <span>⠀</span>
-                            <span>⠀</span>
-                            <a href="?del_prod_id=66">Удалить</a>
+                            <button class=removes_btn data-id=${
+                              product.id
+                            }>Удалить</button>
                         </span>
                     </div>
                     </div>
                 `;
 
-          $(".products").append(a); // Добавляем HTML блок продукта к элементу с классом "products"
+            $(".products").append(a); // Добавляем HTML блок продукта к элементу с классом "products"
+          }
         });
       },
     });
   });
 
-  $(document).on("click", ".removes", function () {
+  $(document).on("click", ".removes_btn", function () {
     const product_id = $(this).data("id");
     $.ajax({
       type: "POST",

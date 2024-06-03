@@ -17,13 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST['name'];
         $price = $_POST['price'];
         $url = $_POST['url'];
+        $discount = 0;
+        if (!empty($_POST['url'])) {
+            $discount = $_POST['discount'];
+        }
 
         $update_query = "UPDATE `products` 
                         SET 
                         `creator` = '$creator', 
                         `name` = '$name', 
                         `price` = '$price', 
-                        `url` = '$url' 
+                        `url` = '$url',
+                        `discount` = '$discount'
                         WHERE 
                         `id` = '$update_id'";
 
@@ -32,9 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $select_query = "SELECT * FROM `products` WHERE `id` = '$update_id'";
             $result = mysqli_query($des, $select_query);
             $product = mysqli_fetch_assoc($result);
-
-            // Генерируем HTML для обновленного продукта
-
 
             $response = [
                 "success" => true,

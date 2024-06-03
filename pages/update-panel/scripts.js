@@ -1,11 +1,16 @@
 const createProduct = (product) => {
   let numHTML = `<div> ${product["creator"]} </div> `;
 
-  let plus = ` <button class=plus data-id='${product["id"]}'> Купить </button>`;
+  let discount = product["discount"]
+    ? product["price"] - (product["price"] * product["discount"]) / 100
+    : 0;
+  let discountHTML = product["discount"] ? `Со скидкой ${discount} руб` : "";
 
+  let plus = ` <button class=plus data-id='${product["id"]}'> Купить </button>`;
   let character = `
       <div>Имя: ${product["name"]} </div>
       <div>Цена: ${product["price"]}руб</div>
+      ${discountHTML}
   `;
 
   let productHTML = `

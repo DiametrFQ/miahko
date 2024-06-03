@@ -1,5 +1,12 @@
 const createProduct = (data) =>
   data.map((product, i) => {
+    console.log(product["discount"] || null);
+    console.log(i);
+
+    let discount = product["discount"]
+      ? product["price"] - (product["price"] * product["discount"]) / 100
+      : 0;
+    let discountHTML = product["discount"] ? `Со скидкой ${discount} руб` : "";
     let productHTML = `
             <div class='product'>
                 <img src=${product["url"]}></img>
@@ -12,6 +19,8 @@ const createProduct = (data) =>
                     <div class="product_info">
                         <div>Имя: ${product["name"]} </div>
                         <div>Цена: ${product["price"]}руб</div>
+                        <div>Цена: ${discountHTML}</div>
+
                     </div>
                     <div class="buttons">
                       <button type="button" class="delete-product-btn" data-id=${
@@ -34,6 +43,7 @@ $(document).ready(function () {
       method: "GET",
       success: function (data) {
         data = JSON.parse(data);
+
         $(".products").html(createProduct(data));
       },
     });

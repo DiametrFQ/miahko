@@ -42,9 +42,11 @@
             <span>Название</span> <input type="text" value="<?= $product["name"] ?>" name="name" required>
             <span>Цена</span> <input type="number" value="<?= $product["price"] ?>" name="price" required>
             <span>Картинка</span> <textarea name="url" required><?= $product["url"] ?></textarea>
+            <span>Скидка</span> <input name="discount" value="<?= $product["discount"] ?>" required></input>
             <br><br><br><button type="submit" id="submitBtn">Изменить</button>
         </form>
         <div id="error_message" style="color: red; display: none;">Не все данные введены</div>
+        <br>
         <div id="success_message" style="color: green; display: none;">Информация успешно обновлена</div>
     </div>
     <?= create_footer() ?>
